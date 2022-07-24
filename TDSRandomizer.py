@@ -24,11 +24,13 @@ towerList = [ # Add/remove towers as needed.
 "Crook Boss",
 "Turret",
 "Mortar",
-"Pursuit"
+"Pursuit",
+"Cowboy"
 ]
 
-goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
-# You may either remove the towers you do not own golden skins for, or comment this list out entirely (using #)
+#goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
+goldenTowers = None # Use if you have no golden towers; comment out the above table as well
+# You may also modify goldenTowers to only include the golden towers you currently own.
 def loadoutGen():
     chosenLoadout = []
     goldenConditions = []
