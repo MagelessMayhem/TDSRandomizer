@@ -1,5 +1,6 @@
 from random import choice, randint
 towerList = [ # Add/remove towers as needed.
+"Farm",
 "Commander",
 "DJ Booth",
 "Scout",
@@ -25,7 +26,17 @@ towerList = [ # Add/remove towers as needed.
 "Turret",
 "Mortar",
 "Pursuit",
-"Cowboy"
+"Cowboy",
+"Warden"#,
+#"Gladiator",
+#"Commando",
+#"Slasher",
+#"Frost Blaster",    
+#"Archer",
+#"Swarmer",
+#"Toxic Gunner",
+#"Sledger",
+#"Executioner"
 ]
 
 #goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
@@ -34,7 +45,7 @@ goldenTowers = None # Use if you have no golden towers; comment out the above ta
 def loadoutGen():
     chosenLoadout = []
     goldenConditions = []
-    for i in range(0, 4):
+    for i in range(0, 5):
         tower = choice(towerList)
         if tower in chosenLoadout:
             while tower in chosenLoadout:
