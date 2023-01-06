@@ -36,7 +36,8 @@ towerList = [ # Add/remove towers as needed.
 #"Swarmer",
 #"Toxic Gunner",
 #"Sledger",
-#"Executioner"
+#"Executioner",
+#"Elf Camp"
 ]
 
 #goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
