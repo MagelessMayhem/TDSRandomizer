@@ -63,13 +63,17 @@ if os.path.isfile("customlist.txt"):
 	cprint("1.", "green", attrs=["bold"], end=" ")
 	cprint("Randomize a loadout from scratch", "blue", attrs=["bold"], end="\n")
 	cprint("2.", "green", attrs=["bold"], end=" ")
-	cprint("Use an existing list for loadout randomization (customlist.txt)", "blue", attrs=["bold"], end="\n\n")
+	cprint("Use an existing list for loadout randomization (customlist.txt)", "blue", attrs=["bold"], end="\n")
+	if os.path.isfile("golden.txt"):
+		cprint("3.", "green", attrs=["bold"], end=" ")
+		cprint("Randomize a loadout based on both the existing list and the separate golden list (golden.txt)", "blue", attrs=["bold"], end="\n\n")
+		cprint("If you want to randomize based on the existing list, select option 2 if you merged the golden perks with the main list, or option 3 if you left them separate. If you want to start over, select option 1.", "green", attrs=["bold"], end="\n\n")
 	cprint("Please select an option:", "cyan", attrs=["bold"], end=" ")
 	promptfile = int(input())
 	if promptfile == 1:
 		cprint("OK, proceeding normally.", "green", attrs=["bold"])
 		sleep(1)
-	elif promptfile == 2:
+	elif promptfile >= 2:
 		cprint("OK, I'll use your list for customization.", "green", attrs=["bold"])
 		sleep(1)
 		list = open("customlist.txt", "r")
@@ -105,7 +109,21 @@ if os.path.isfile("customlist.txt"):
 				loadout.append(selection)
 				customBase.remove(selection)
 					
-						
+		if promptfile == 3:
+			goldfile = open("golden.txt", "r")
+			for gold in goldfile.readlines():
+				for tower in loadout:
+					if gold.split("\n")[0] == tower:
+						coinflip = randint(1,2)
+						if coinflip == 1:
+							newGolden = tower.replace(tower, "Golden " + tower)
+							loadout.append(newGolden)
+							loadout.remove(tower)
+							
+			goldfile.close()
+		
+		list.close()
+		
 		cprint("\nThe loadout has successfully been generated:", "cyan", attrs=["bold"], end="\n\n")
 		cprint("1:", "green", attrs=["bold"], end=" ")
 		cprint(loadout[0], "blue", attrs=["bold"], end="\n")
@@ -121,7 +139,7 @@ if os.path.isfile("customlist.txt"):
 		cprint("TDSRandomizer will now exit. Have fun!", "cyan", attrs=["bold"])
 		sleep(1)
 		os._exit(0)
-		
+
 cprint("First, I need to know what base towers you have.", "cyan", attrs=["bold"])
 sleep(1)
 customBase = TowerHandler(baseTowers)
@@ -355,8 +373,15 @@ if promptsv == "y" or promptsv == "yes":
 	sleep(0.5)
 	f = open("customlist.txt", "w")
 	f.write('\n'.join(fileData))
-	cprint("Your list has been saved to customlist.txt. You may modify it at any time.", "cyan", attrs=["bold"])
+	cprint("\nYour list has been saved to customlist.txt. You may modify it at any time.", "cyan", attrs=["bold"])
 	sleep(0.5)
+	f.close()
+	if goldenIndependent and canUseGolden:
+		goldfile = open("golden.txt", "w")
+		goldfile.write('\n'.join(customGolden))
+		cprint("\nYou had selected the 50/50 option during golden perk configuration; therefore, your golden perks list will be saved to golden.txt. You may modify it at any time.", "cyan", attrs=["bold"])
+		sleep(0.5)
+		goldfile.close()
 
 cprint("TDSRandomizer will now exit. Have fun!", "cyan", attrs=["bold"])
 sleep(1)
