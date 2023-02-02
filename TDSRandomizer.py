@@ -107,7 +107,7 @@ mapTowers = ["Cowboy", "Warden"]
 eventTowers = ["Gladiator", "Commando", "Slasher", "Archer", "Frost Blaster", "Swarmer", "Toxic Gunner", "Sledger", "Executioner", "Elf Camp"]
 goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
 loadout = []
-cprint("\n\nTDS Randomizer v2.2-r1 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
+cprint("\n\nTDS Randomizer v2.3 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
 sleep(2)
 if os.path.isfile("customlist.txt"):
 	cprint("Welcome! What would you like to do?", "cyan", attrs=["bold"], end="\n\n")
@@ -163,12 +163,37 @@ if os.path.isfile("customlist.txt"):
 		if len(loadout) < 1:
 			for i in range(0, 5):
 				# Generate normally
-				selection = choice(customBase)
+				# Also ignore the last value; this is the player's level
+				selection = None
+				if len(customBase) > 0 and len(customBase) <= 2:
+					selection = customBase[0]
+			
+				elif len(customBase) == 0:
+					continue
+				
+				else:
+					selection = customBase[randint(0,len(customBase)-2)]
+					
+				if selection.isdigit():
+					continue # Quit looping if we hit the player's level. This can only occur if the player has less than 5 towers.
+					
 				loadout.append(selection)
 				customBase.remove(selection)
-		else:
+		elif loadout[0] == "Farm" or len(loadout) == 0:
 			for i in range(0, 4):
-				selection = choice(customBase)
+				selection = None
+				if len(customBase) <= 2:
+					selection = customBase[0]
+					
+				elif len(customBase) == 0:
+					continue
+				
+				else:
+					selection = customBase[randint(0,len(customBase)-2)]
+					
+				if selection.isdigit():
+					continue
+				
 				loadout.append(selection)
 				customBase.remove(selection)
 					
@@ -188,16 +213,39 @@ if os.path.isfile("customlist.txt"):
 		list.close()
 		
 		cprint("\nThe loadout has successfully been generated:", "cyan", attrs=["bold"], end="\n\n")
-		cprint("1:", "green", attrs=["bold"], end=" ")
-		cprint(loadout[0], "blue", attrs=["bold"], end="\n")
-		cprint("2:", "green", attrs=["bold"], end=" ")
-		cprint(loadout[1], "blue", attrs=["bold"], end="\n")
-		cprint("3:", "green", attrs=["bold"], end=" ")
-		cprint(loadout[2], "blue", attrs=["bold"], end="\n")
-		cprint("4:", "green", attrs=["bold"], end=" ")
-		cprint(loadout[3], "blue", attrs=["bold"], end="\n")
-		cprint("5:", "green", attrs=["bold"], end=" ")
-		cprint(loadout[4], "blue", attrs=["bold"], end="\n\n")
+		if len(loadout) == 5: # Will go to this condition 99% of the time, since most players have at least 5 towers unlocked
+			cprint("1:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+			cprint("2:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[1], "blue", attrs=["bold"], end="\n")
+			cprint("3:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[2], "blue", attrs=["bold"], end="\n")
+			cprint("4:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[3], "blue", attrs=["bold"], end="\n")
+			cprint("5:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[4], "blue", attrs=["bold"], end="\n\n")
+		# Otherwise it falls to one of these conditions.
+		elif len(loadout) == 4:
+			cprint("1:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+			cprint("2:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[1], "blue", attrs=["bold"], end="\n")
+			cprint("3:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[2], "blue", attrs=["bold"], end="\n")
+			cprint("4:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[3], "blue", attrs=["bold"], end="\n")
+		elif len(loadout) == 3:
+			cprint("1:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+			cprint("2:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[1], "blue", attrs=["bold"], end="\n")
+			cprint("3:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[2], "blue", attrs=["bold"], end="\n")
+		else:
+			cprint("1:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+			cprint("2:", "green", attrs=["bold"], end=" ")
+			cprint(loadout[1], "blue", attrs=["bold"], end="\n")
 		
 		sleep(0.5)
 		if randommap != None:
@@ -455,12 +503,37 @@ for i in range(0, len(customBase) - 1):
 if len(loadout) < 1:
 	for i in range(0, 5):
 		# Generate normally
-		selection = choice(customBase)
+		# Also ignore the last value; this is the player's level
+		selection = None
+		if len(customBase) > 0 and len(customBase) <= 2:
+			selection = customBase[0]
+			
+		elif len(customBase) == 0:
+			continue
+		
+		else:
+			selection = customBase[randint(0,len(customBase)-2)]
+			
+		if selection.isdigit():
+			continue # Quit looping if we hit the player's level. This can only occur if the player has less than 5 towers.
+			
 		loadout.append(selection)
 		customBase.remove(selection)
-else:
+elif loadout[0] == "Farm" or len(loadout) == 0:
 	for i in range(0, 4):
-		selection = choice(customBase)
+		selection = None
+		if len(customBase) > 0 and len(customBase) <= 2:
+			selection = customBase[0]
+			
+		elif len(customBase) == 0:
+			continue
+		
+		else:
+			selection = customBase[randint(0,len(customBase)-2)]
+			
+		if selection.isdigit():
+			continue
+		
 		loadout.append(selection)
 		customBase.remove(selection)
 					
@@ -473,18 +546,39 @@ if goldenIndependent and canUseGolden:
 						newGolden = tower.replace(tower, "Golden " + tower)
 						loadout.append(newGolden)
 						loadout.remove(tower)
-						
 cprint("\nThe loadout has successfully been generated:", "cyan", attrs=["bold"], end="\n\n")
-cprint("1:", "green", attrs=["bold"], end=" ")
-cprint(loadout[0], "blue", attrs=["bold"], end="\n")
-cprint("2:", "green", attrs=["bold"], end=" ")
-cprint(loadout[1], "blue", attrs=["bold"], end="\n")
-cprint("3:", "green", attrs=["bold"], end=" ")
-cprint(loadout[2], "blue", attrs=["bold"], end="\n")
-cprint("4:", "green", attrs=["bold"], end=" ")
-cprint(loadout[3], "blue", attrs=["bold"], end="\n")
-cprint("5:", "green", attrs=["bold"], end=" ")
-cprint(loadout[4], "blue", attrs=["bold"], end="\n\n")
+if len(loadout) == 5:					
+	cprint("1:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+	cprint("2:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[1], "blue", attrs=["bold"], end="\n")
+	cprint("3:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[2], "blue", attrs=["bold"], end="\n")
+	cprint("4:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[3], "blue", attrs=["bold"], end="\n")
+	cprint("5:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[4], "blue", attrs=["bold"], end="\n\n")
+elif len(loadout) == 4:
+	cprint("1:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+	cprint("2:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[1], "blue", attrs=["bold"], end="\n")
+	cprint("3:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[2], "blue", attrs=["bold"], end="\n")
+	cprint("4:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[3], "blue", attrs=["bold"], end="\n")
+elif len(loadout) == 3:
+	cprint("1:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+	cprint("2:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[1], "blue", attrs=["bold"], end="\n")
+	cprint("3:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[2], "blue", attrs=["bold"], end="\n")
+else:
+	cprint("1:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[0], "blue", attrs=["bold"], end="\n")
+	cprint("2:", "green", attrs=["bold"], end=" ")
+	cprint(loadout[1], "blue", attrs=["bold"], end="\n")
 
 if randommap != None:
 	cprint("Your map is:", "green", attrs=["bold"], end=" ")
@@ -494,6 +588,7 @@ if randommap != None:
 cprint("Would you like to save your custom tower list for future randomization? (Only recommended if golden perks were merged) [y/n]", "cyan", attrs=["bold"], end=" ")
 promptsv = input()
 if promptsv == "y" or promptsv == "yes":
+	fileData.append(str(intinput))
 	sleep(0.5)
 	f = open("customlist.txt", "w")
 	f.write('\n'.join(fileData))
