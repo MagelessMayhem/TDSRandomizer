@@ -49,14 +49,65 @@ def TowerHandler(arr):
 	cprint("\nWe're now done. Your custom pool with be used later on.", "green", attrs=["bold"])
 	sleep(0.5)
 	return owned
-	
+
+maps = [
+	"Portland",
+	"Grass Isle",
+	"Toyboard",
+	"Iceville",
+	"Necropolis",
+	"Meltdown",
+	"Marshlands",
+	"Harbor",
+	"Abandoned City",
+	"Autumn Falling",
+	"Cataclysm",
+	"Construction Crazy",
+	"Crossroads",
+	"Crystal Cave",
+	"Cyber City",
+	"Deserted Village",
+	"Forest Camp",
+	"Four Seasons",
+	"Fungi Island",
+	"Medieval Times",
+	"Moon Base",
+	"Nether",
+	"Retro Zone",
+	"Rocket Arena",
+	"Simplicity",
+	"Spring Fever",
+	"The Heights",
+	"Tropical Isles",
+	"Winter Bridges",
+	"Abyssal Trench",
+	"Candy Valley",
+	"Chess Board",
+	"Dusty Bridges",
+	"Farm Lands",
+	"Forgotten Docks",
+	"Night Station",
+	"Ruby Escort",
+	"Sky Islands",
+	"Winter Abyss",
+	"Wrecked Battlefield",
+	"Dead Ahead",
+	"Gilded Path",
+	"Infernal Abyss",
+	"Lay By",
+	"Mason Arch",
+	"Sacred Mountains",
+	"Space City",
+	"Winter Stronghold"
+]
+
 hardcoreTowers = ["Accelerator", "Engineer"]
 levelTowers = ["Crook Boss", "Turret", "Mortar", "Pursuit"]
 mapTowers = ["Cowboy", "Warden"]
 eventTowers = ["Gladiator", "Commando", "Slasher", "Archer", "Frost Blaster", "Swarmer", "Toxic Gunner", "Sledger", "Executioner", "Elf Camp"]
 goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
 loadout = []
-cprint("\n\nTDS Randomizer v2.0 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
+cprint("\n\nTDS Randomizer v2.2 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
 sleep(2)
 if os.path.isfile("customlist.txt"):
 	cprint("Welcome! What would you like to do?", "cyan", attrs=["bold"], end="\n\n")
@@ -93,6 +144,18 @@ if os.path.isfile("customlist.txt"):
 			else:
 				cprint("\nOK. I'll proceed normally.", "green", attrs=["bold"])
 				sleep(0.5)
+				
+		cprint("\nWould you also like the map to be randomized? It will be selected completely randomly with no difficulty bias. [y/n]", "cyan", attrs=["bold"], end=" ")
+		
+		inputmap = input()
+		randommap = None
+		
+		if inputmap == "y" or inputmap == "yes":
+			cprint("\nOK, the map will be randomly selected.", "green", attrs=["bold"], end=" ")
+			sleep(0.5)
+			randommap = choice(maps)
+		else:
+			cprint("\nOK, I'll let you pick your own map.", "green", attrs=["bold"])
 		
 		cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
 		sleep(3)
@@ -136,6 +199,12 @@ if os.path.isfile("customlist.txt"):
 		cprint("5:", "green", attrs=["bold"], end=" ")
 		cprint(loadout[4], "blue", attrs=["bold"], end="\n\n")
 		
+		sleep(0.5)
+		if randommap != None:
+			cprint("Your map is:", "green", attrs=["bold"], end=" ")
+			cprint(randommap, "blue", attrs=["bold"])
+			sleep(0.5)
+			
 		cprint("TDSRandomizer will now exit. Have fun!", "cyan", attrs=["bold"])
 		sleep(1)
 		os._exit(0)
@@ -316,7 +385,41 @@ if promptg == "y" or promptg == "yes":
 					cprint("OK", "light_green", attrs=["bold"])
 		
 		cprint("\nFinished.", "green", attrs=["bold"])
+	
+cprint("\nAnd finally, do you own any special towers, namely War Machine or Mecha Base? [y/n]", "cyan", attrs=["bold"], end=" ")
+prompts = input()
+if prompts == "y" or prompts == "yes":
+	sleep(0.5)
+	cprint("Do you have", "green", attrs=["bold"], end=" ")
+	cprint("War Machine", "blue", attrs=["bold"], end="")
+	cprint("? [y/n]", "green", attrs=["bold"], end=" ")
+	promptwm = input()
+	if promptwm == "y" or promptwm == "yes":
+		sleep(0.5)
+		cprint("OK, I'll add it to your pool.", "green", attrs=["bold"])
+		customBase.append("War Machine")
+	else:
+		sleep(0.5)
+		cprint("OK, I'll omit it from the pool.", "green", attrs=["bold"])
 		
+	sleep(0.5)
+	cprint("Do you have", "green", attrs=["bold"], end=" ")
+	cprint("Mecha Base", "blue", attrs=["bold"], end="")
+	cprint("? [y/n]", "green", attrs=["bold"], end=" ")
+	promptmb = input()
+	if promptmb == "y" or promptmb == "yes":
+		sleep(0.5)
+		cprint("OK, I'll add it to your pool.", "green", attrs=["bold"])
+		customBase.append("Mecha Base")
+	else:
+		sleep(0.5)
+		cprint("OK, I'll omit it from the pool.", "green", attrs=["bold"])
+		
+else:
+	sleep(0.5)
+	cprint("OK, you won't be asked about them.", "green", attrs=["bold"])
+	
+sleep(0.5)
 cprint("\nConfiguration has finally finished. Now proceeding to randomization.", "cyan", attrs=["bold"])
 sleep(2)
 if "Farm" in customBase:
