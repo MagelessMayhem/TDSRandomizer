@@ -107,7 +107,7 @@ mapTowers = ["Cowboy", "Warden"]
 eventTowers = ["Gladiator", "Commando", "Slasher", "Archer", "Frost Blaster", "Swarmer", "Toxic Gunner", "Sledger", "Executioner", "Elf Camp"]
 goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
 loadout = []
-cprint("\n\nTDS Randomizer v2.3 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
+cprint("\n\nTDS Randomizer v2.4 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
 sleep(2)
 if os.path.isfile("customlist.txt"):
 	cprint("Welcome! What would you like to do?", "cyan", attrs=["bold"], end="\n\n")
@@ -477,6 +477,7 @@ if "Farm" in customBase:
 		cprint("\nOK. Farm will be generated in slot 1.", "green", attrs=["bold"])
 		sleep(0.5)
 		loadout.append("Farm")
+		customBase.remove("Farm")
 	else:
 		cprint("\nOK. I'll proceed normally.", "green", attrs=["bold"])
 		sleep(0.5)
@@ -512,7 +513,7 @@ if len(loadout) < 1:
 			continue
 		
 		else:
-			selection = customBase[randint(0,len(customBase)-2)]
+			selection = choice(customBase)
 			
 		if selection.isdigit():
 			continue # Quit looping if we hit the player's level. This can only occur if the player has less than 5 towers.
@@ -529,7 +530,7 @@ elif loadout[0] == "Farm" or len(loadout) == 0:
 			continue
 		
 		else:
-			selection = customBase[randint(0,len(customBase)-2)]
+			selection = choice(customBase)
 			
 		if selection.isdigit():
 			continue
@@ -588,7 +589,7 @@ if randommap != None:
 cprint("Would you like to save your custom tower list for future randomization? (Only recommended if golden perks were merged) [y/n]", "cyan", attrs=["bold"], end=" ")
 promptsv = input()
 if promptsv == "y" or promptsv == "yes":
-	fileData.append(str(intinput))
+	fileData.append(str(intprompt))
 	sleep(0.5)
 	f = open("customlist.txt", "w")
 	f.write('\n'.join(fileData))
