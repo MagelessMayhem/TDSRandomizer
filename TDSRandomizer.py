@@ -432,7 +432,19 @@ if "Farm" in customBase:
 	else:
 		cprint("\nOK. I'll proceed normally.", "green", attrs=["bold"])
 		sleep(0.5)
+
+cprint("\nWould you also like the map to be randomized? It will be selected completely randomly with no difficulty bias. [y/n]", "cyan", attrs=["bold"], end=" ")
 		
+inputmap = input()
+randommap = None
+	
+if inputmap == "y" or inputmap == "yes":
+	cprint("\nOK, the map will be randomly selected.", "green", attrs=["bold"], end=" ")
+	sleep(0.5)
+	randommap = choice(maps)
+else:
+	cprint("\nOK, I'll let you pick your own map.", "green", attrs=["bold"])
+	
 cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
 sleep(3)
 fileData = customBase
@@ -469,6 +481,11 @@ cprint("4:", "green", attrs=["bold"], end=" ")
 cprint(loadout[3], "blue", attrs=["bold"], end="\n")
 cprint("5:", "green", attrs=["bold"], end=" ")
 cprint(loadout[4], "blue", attrs=["bold"], end="\n\n")
+
+if randommap != None:
+	cprint("Your map is:", "green", attrs=["bold"], end=" ")
+	cprint(randommap, "blue", attrs=["bold"])
+	sleep(0.5)
 
 cprint("Would you like to save your custom tower list for future randomization? (Only recommended if golden perks were merged) [y/n]", "cyan", attrs=["bold"], end=" ")
 promptsv = input()
