@@ -107,7 +107,7 @@ mapTowers = ["Cowboy", "Warden"]
 eventTowers = ["Gladiator", "Commando", "Slasher", "Archer", "Frost Blaster", "Swarmer", "Toxic Gunner", "Sledger", "Executioner", "Elf Camp"]
 goldenTowers = ["Scout", "Soldier", "Pyromancer", "Cowboy", "Minigunner", "Crook Boss"]
 loadout = []
-cprint("\n\nTDS Randomizer v2.2 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
+cprint("\n\nTDS Randomizer v2.2-r1 - Written by MagelessMayhem (Thymestl)\n\nPlease wait...\n\n", "cyan", attrs=["bold"])
 sleep(2)
 if os.path.isfile("customlist.txt"):
 	cprint("Welcome! What would you like to do?", "cyan", attrs=["bold"], end="\n\n")
@@ -447,7 +447,11 @@ else:
 	
 cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
 sleep(3)
-fileData = customBase
+fileData = []
+for i in range(0, len(customBase) - 1):
+	fileData.append(customBase[i])
+	
+
 if len(loadout) < 1:
 	for i in range(0, 5):
 		# Generate normally
