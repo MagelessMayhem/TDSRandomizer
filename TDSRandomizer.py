@@ -500,9 +500,10 @@ else:
 	
 cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
 sleep(3)
+print(customBase)
 fileData = []
-for i in range(0, len(customBase) - 1):
-	fileData.append(customBase[i])
+for tower in customBase:
+	fileData.append(tower)
 
 if willUseFarm:
 	customBase.remove("Farm")
@@ -553,6 +554,9 @@ if goldenIndependent and canUseGolden:
 						newGolden = tower.replace(tower, "Golden " + tower)
 						loadout.append(newGolden)
 						loadout.remove(tower)
+						
+fileData.append(str(intprompt))
+print(fileData)
 cprint("\nThe loadout has successfully been generated:", "cyan", attrs=["bold"], end="\n\n")
 if len(loadout) == 5:					
 	cprint("1:", "green", attrs=["bold"], end=" ")
