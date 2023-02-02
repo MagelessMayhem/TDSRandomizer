@@ -100,7 +100,7 @@ maps = [
 	"Space City",
 	"Winter Stronghold"
 ]
-
+willUseFarm = False
 hardcoreTowers = ["Accelerator", "Engineer"]
 levelTowers = ["Crook Boss", "Turret", "Mortar", "Pursuit"]
 mapTowers = ["Cowboy", "Warden"]
@@ -137,10 +137,10 @@ if os.path.isfile("customlist.txt"):
 			cprint("\nYou had chosen Farm during the base tower phase of configuration. Should it be automatically included in the final loadout? This will help fund any offensive towers the randomizer generates. [y/n]", "cyan", attrs=["bold"], end=" ")
 			promptfarm = input()
 			if promptfarm == "y" or promptfarm == "yes":
+				willUseFarm = True
 				cprint("\nOK. Farm will be generated in slot 1.", "green", attrs=["bold"])
 				sleep(0.5)
 				loadout.append("Farm")
-				customBase.remove("Farm")
 			else:
 				cprint("\nOK. I'll proceed normally.", "green", attrs=["bold"])
 				sleep(0.5)
@@ -160,6 +160,9 @@ if os.path.isfile("customlist.txt"):
 		cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
 		sleep(3)
 		fileData = customBase
+		if willUseFarm:
+			customBase.remove("Farm")
+			
 		if len(loadout) < 1:
 			for i in range(0, 5):
 				# Generate normally
@@ -470,14 +473,15 @@ else:
 sleep(0.5)
 cprint("\nConfiguration has finally finished. Now proceeding to randomization.", "cyan", attrs=["bold"])
 sleep(2)
+willUseFarm = False
 if "Farm" in customBase:
 	cprint("\nYou had chosen Farm during the base tower phase of configuration. Should it be automatically included in the final loadout? This will help fund any offensive towers the randomizer generates. [y/n]", "cyan", attrs=["bold"], end=" ")
 	promptfarm = input()
 	if promptfarm == "y" or promptfarm == "yes":
+		willUseFarm = True
 		cprint("\nOK. Farm will be generated in slot 1.", "green", attrs=["bold"])
 		sleep(0.5)
 		loadout.append("Farm")
-		customBase.remove("Farm")
 	else:
 		cprint("\nOK. I'll proceed normally.", "green", attrs=["bold"])
 		sleep(0.5)
@@ -499,7 +503,9 @@ sleep(3)
 fileData = []
 for i in range(0, len(customBase) - 1):
 	fileData.append(customBase[i])
-	
+
+if willUseFarm:
+	customBase.remove("Farm")
 
 if len(loadout) < 1:
 	for i in range(0, 5):
