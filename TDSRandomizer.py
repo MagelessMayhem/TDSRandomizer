@@ -23,7 +23,7 @@ def TowerHandler(arr):
 	cprint("I will now ask you about owning each tower in the specified list. Simply answer yes (or y) or no (or n).", "green", attrs=["bold"])
 	sleep(2)
 	if "Commander" in arr:
-		cprint("\nAutomatically adding the starter towers.", "light_magenta", attrs=["bold"])
+		cprint("\nAutomatically adding the starter towers.", "magenta", attrs=["bold"])
 		sleep(1)
 		owned.append("Scout")
 		owned.append("Sniper")
@@ -157,7 +157,7 @@ if os.path.isfile("customlist.txt"):
 		else:
 			cprint("\nOK, I'll let you pick your own map.", "green", attrs=["bold"])
 		
-		cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
+		cprint("\nNow randomizing, please wait...", "magenta", attrs=["bold"])
 		sleep(3)
 		fileData = customBase
 		if willUseFarm:
@@ -498,7 +498,7 @@ if inputmap == "y" or inputmap == "yes":
 else:
 	cprint("\nOK, I'll let you pick your own map.", "green", attrs=["bold"])
 	
-cprint("\nNow randomizing, please wait...", "light_magenta", attrs=["bold"])
+cprint("\nNow randomizing, please wait...", "magenta", attrs=["bold"])
 sleep(3)
 print(customBase)
 fileData = []
